@@ -6,22 +6,20 @@ import path from 'path'
 export default defineConfig({
   plugins: [react()],
   
-  chunkSizeWarningLimit: 1000,
-  
   base: '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
     // Generate manifest for debugging
-    mainfest: true,
+    manifest: true,
     
-    rollUpOptions: {
+    rollupOptions: {
       input: path.resolve(__dirname, 'index.html'),
       
       output: {
         // Ensure assets use file extension
         assetFileNames: (assetInfo) => {
-          const info = assetInfo.name.split('.')
+          const info = assetInfo.name?.split('.') ?? ['others'];
           const extension = info[info.length - 1]
           
           return `assets/${extension}/[name]-[hash][extname]`
