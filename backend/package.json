@@ -1,16 +1,22 @@
 {
-  "name": "backend",
+  "name": "Comet Billing",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "dev": "nodemon app"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Magic",
+  "license": "MIT",
   "packageManager": "pnpm@10.33.0",
   "dependencies": {
+    "chalk": "4.1.0",
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
