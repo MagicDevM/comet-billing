@@ -8,28 +8,28 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
+const nocache = require('nocache');
 
 // Get in-app functions
+const loadConfig = require('./handlers/loadConfig');
 const loadModules = require('./handlers/moduleLoader');
+
+const config = loadConfig();
 
 // Initialize the express app
 const app = express();
 
-console.log(chalk.white(chalk.bold.yellow('[server]') + ' Starting Server...'));
+console.log((chalk.bold.yellow('[server]') + chalk.yellow(' Starting Server...')));
 
-// setup frontend connection
-const distPath = path.join(__dirname, "../frontend/dist");
-// setup absolute path for frontend elements
-app.use('/', express.static(distPath, {
-  fallthrough: true,
-  index: false
-}));
+// Load package middlewares
+app.use(nocache());
 
-app.listen(3030, "0.0.0.0", () => {
+const PORT = config.general.port || 3030;
+app.listen(PORT, "0.0.0.0", () => {
   // Load all modules
   loadModules(app);
   
-  console.log(chalk.gray.bold(`Webserver is now online on PORT ${3030}`))
+  console.log(chalk.gray.bold(`Webserver is now online on PORT ${PORT}`))
 }).on("error", error => {
   if (error.code === "EADDRINUSE") 
     return console.error(chalk.red(chalk.bold.yellow.bold('[server]') + 

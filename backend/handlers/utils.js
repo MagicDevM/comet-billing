@@ -38,7 +38,7 @@ function getFiles(dir, options = {}) {
     })
   } catch (error) {
     if (error !== "EACCES")
-      console.error(chalk.yellow.bold('[server] ') + error);
+      console.error(chalk.yellow.bold('[server] ') + chalk.red(error));
   }
   
   // Return the files

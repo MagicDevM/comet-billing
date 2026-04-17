@@ -1,3 +1,4 @@
+const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk')
@@ -8,13 +9,19 @@ const manifest = {
 };
 
 function load(router) {
+  // setup frontend connection
+  const distPath = path.join(__dirname, "../frontend/dist");
+  
+  // setup absolute path for frontend elements
+  router.use('/', express.static(distPath, {
+    fallthrough: true,
+    index: false
+  }));
+  
   router.use(async (req, res, next) => {
     if (req.path.startsWith('/api')) return next();
     
     try {
-      // setup frontend connection
-      const distPath = path.join(__dirname, "../../frontend/dist");
-      
       // Get main html
       const htmlPath = path.join(distPath, "index.html");
       
