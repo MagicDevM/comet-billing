@@ -1,8 +1,9 @@
+const express = require('express');
 const path = require('path');
 const chalk = require('chalk');
 const getFiles = require('./utils.js');
 
-function loadModules(express, app) {
+function loadModules(app) {
   // Loaded module Number
   let loadedModules = 0;
   
@@ -37,7 +38,10 @@ function loadModules(express, app) {
         moduleFile.load(router);
         
         // Apply the declared routes
-        app.use('/api', router);
+        if (!moduleFile.manifest.middleware)
+          app.use('/api', router);
+        else
+          app.use(router);
         
         // increment loadedModules by one
         loadedModules++;
