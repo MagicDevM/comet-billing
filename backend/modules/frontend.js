@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const chalk = require('chalk')
+const chalk = require('chalk');
+const config = require('../handlers/loadConfig')();
 
 const manifest = {
   name: 'Frontend Module',
@@ -33,7 +34,7 @@ function load(router) {
       if (!html) throw new Error('No displayable pages found');
     
       // Apply dynamic values
-      html = html.replace(/{{SITE_NAME}}/g, "Comet Billing");
+      html = html.replace(/{{SITE_NAME}}/g, config.general.name || "Comet Billing");
       
       // Send html to the browser(client)
       res.send(html);
