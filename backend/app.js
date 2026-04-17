@@ -1,7 +1,16 @@
+"use strict";
+
+/**
+ * @fileoverview Comet Billing - © Comet Labs 2026
+ */
+
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
+
+// Get in-app functions
+const loadModules = require('./handlers/moduleLoader');
 
 // Initialize the express app
 const app = express();
@@ -59,6 +68,9 @@ app.use(async (req, res, next) => {
 });
 
 app.listen(3030, "0.0.0.0", () => {
+  // Load all modules
+  loadModules(express, app);
+  
   console.log(chalk.gray.bold(`Webserver is now online on PORT ${3030}`))
 }).on("error", error => {
   if (error.code === "EADDRINUSE") 
