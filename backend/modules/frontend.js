@@ -10,7 +10,7 @@ const manifest = {
 
 function load(router) {
   // setup frontend connection
-  const distPath = path.join(__dirname, "../frontend/dist");
+  const distPath = path.join(__dirname, "../../frontend/dist");
   
   // setup absolute path for frontend elements
   router.use('/', express.static(distPath, {

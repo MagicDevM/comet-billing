@@ -54,7 +54,7 @@ function loadModules(app) {
   // Calculate total ms taken to load modules
   const loadMs = Date.now() - startTime;
   
-  console.log(chalk.blue.bold('[Module Manager] ') + chalk.gray(`Loaded ${loadedModules} modules in ${loadMs}ms`));
+  console.log(chalk.blue.bold('[Module Manager] ') + chalk.white(`Loaded ${loadedModules} modules in ${loadMs}ms`));
 };
 
 module.exports = loadModules;

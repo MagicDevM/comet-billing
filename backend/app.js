@@ -12,7 +12,7 @@ const nocache = require('nocache');
 
 // Get in-app functions
 const loadConfig = require('./handlers/loadConfig');
-const loadModules = require('./handlers/moduleLoader');
+const loadModules = require('./handlers/loadModules');
 
 const config = loadConfig();
 
